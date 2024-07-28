@@ -27,12 +27,15 @@ uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6fn2w"]
 
-[node name="NumberedCube3D" type="Node3D"]
+[node name="NumberedCube3D" type="Node3D" node_paths=PackedStringArray("rigid_body")]
 script = ExtResource("1_4bivt")
+rigid_body = NodePath("Tile")
 
 [node name="Tile" type="RigidBody3D" parent="." node_paths=PackedStringArray("mesh", "canvas")]
 mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_54ggr")
+max_contacts_reported = 5
+contact_monitor = true
 script = ExtResource("2_u1gma")
 Value = 11
 mesh = NodePath("MeshInstance3D")
@@ -49,3 +52,5 @@ shape = SubResource("BoxShape3D_6fn2w")
 size = Vector2i(256, 256)
 
 [node name="TileCanvas" parent="Tile/SubViewport" instance=ExtResource("3_c8ii3")]
+
+[connection signal="body_entered" from="Tile" to="." method="_on_tile_body_entered"]

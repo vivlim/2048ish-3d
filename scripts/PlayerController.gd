@@ -8,6 +8,7 @@ extends Node
 var debug_labels := {}
 
 var last_accepted_input: Vector3 = Vector3.ZERO
+var last_seen_input: Vector3 = Vector3.ZERO # used for debouncing
 var buffered_input = null
 var waiting_for_settle: bool = true
 
@@ -44,6 +45,7 @@ func _physics_process(delta):
 	debug_labels["waiting_for_settle"]= str(waiting_for_settle)
 	debug_label_float("time_since_move", time_since_move)
 	debug_labels["last_accepted_input"]= str(last_accepted_input)
+	debug_labels["last_seen_input"]= str(last_seen_input)
 	debug_labels["buffered_input"]= str(buffered_input)
 
 	var num_moving_tiles := 0
@@ -62,23 +64,22 @@ func _physics_process(delta):
 #						rb.angular_velocity = lerp(rb.angular_velocity, Vector3.ZERO, 0.7)
 		if num_moving_tiles == 0 or time_since_move > start_damping_after:
 			waiting_for_settle = false
+			spawn_new_tile()
 	debug_labels["num_moving_tiles"]= str(num_moving_tiles)
 	debug_labels["num_tiles"]= str(num_tiles)
 			
 	var new_input = read_input()
-	if new_input is Vector3:
-		buffered_input = new_input
 
-	if buffered_input is Vector3 and not waiting_for_settle:
-		if buffered_input != last_accepted_input:
-			waiting_for_settle = true
-			time_since_move = 0.0
-			for c in self.get_children():
-				var rb: RigidBody3D = access_rigidbody(c)
-				if rb is RigidBody3D:
-					rb.apply_impulse(buffered_input * move_speed)
-			last_accepted_input = buffered_input
-			spawn_new_tile()
+	if new_input is Vector3 and buffered_input.length() > 0.0 and not waiting_for_settle:
+		waiting_for_settle = true
+		time_since_move = 0.0
+		for c in self.get_children():
+			var rb: RigidBody3D = access_rigidbody(c)
+			if rb is RigidBody3D:
+				rb.apply_impulse(buffered_input * move_speed)
+		last_accepted_input = buffered_input
+		# must consume the buffered_input
+		buffered_input = Vector3.ZERO
 	
 	update_debug_label()
 
@@ -93,22 +94,30 @@ func access_rigidbody(node: Node):
 
 		
 func read_input():
-	if waiting_for_settle:
-		return null
-
 	var input := Vector3.ZERO
 	input.x = Input.get_axis("left", "right")
 	input.z = Input.get_axis("up", "down")
+
+	# if there is a previously seen input and it is the same, discard it - we want to return to zero first
+	if input == last_seen_input:
+		last_seen_input = input
+		return null
+	last_seen_input = input
 
 	if input.length() > 0.0:
 		input = input.normalized()
 		if not (input.x == 0 or input.z == 0):
 			return
 		
-		if input != last_accepted_input:
-			return input
-
-	return null
+		# comment this to disallow moving in the same direction consecutively
+		#if input != last_accepted_input:
+		buffered_input = input
+		return input
+	else:
+		# nothing's pressed
+		if buffered_input is Vector3:
+			return buffered_input
+		return null
 
 func spawn_new_tile():
 	var bounding_box = SpawnField.get_aabb()
@@ -128,7 +137,7 @@ func spawn_new_tile():
 		new_position.x = rng.randf_range(min_x, max_x)
 		new_position.y = rng.randf_range(min_y, max_y)
 		new_position.z = rng.randf_range(min_z, max_z)
-		print("trying to place tile at " + str(new_position) + ", attempt: " + str(attempts_remaining))
+		#print("trying to place tile at " + str(new_position) + ", attempt: " + str(attempts_remaining))
 		if check_space_empty(new_position):
 			var new_tile = tile_scene.instantiate() as Node3D
 			self.add_child(new_tile)

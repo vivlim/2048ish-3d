@@ -2,5 +2,6 @@
 
 [resource]
 resource_local_to_scene = true
-diffuse_mode = 3
+diffuse_mode = 1
 albedo_color = Color(0.78183, 0.78183, 0.78183, 1)
+roughness = 0.0
