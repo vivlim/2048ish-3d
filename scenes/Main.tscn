@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvyfx8rvlm222"]
+
+[ext_resource type="MeshLibrary" uid="uid://dn16qnfkxbo5q" path="res://assets/Tiles.tres" id="1_pqcev"]
+[ext_resource type="PackedScene" uid="uid://c44kyuicrnvbt" path="res://scenes/NumberedCube3D.tscn" id="2_anpve"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w0de3"]
+
+[sub_resource type="Environment" id="Environment_7fy1y"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_pqcev")
+physics_material = SubResource("PhysicsMaterial_w0de3")
+data = {
+"cells": PackedInt32Array(-2, 1, 2, -2, 0, 2, -2, 65535, 2, -2, 65534, 2, -1, 65534, 2, -65536, 65534, 2, -65535, 65534, 2, -65535, 65535, 2, -65535, 0, 2, -65535, 1, 2, -65536, 1, 2, -1, 1, 2, -1, 0, 2, -1, 65535, 2, -65536, 65535, 2, -65536, 0, 2, -65535, 65533, 1, -65536, 65533, 1, -1, 65533, 1, -2, 65533, 1, -3, 65534, 1, -3, 65535, 1, -3, 0, 1, -3, 1, 1, -2, 2, 1, -1, 2, 1, -65536, 2, 1, -65535, 2, 1, -65534, 1, 1, -65534, 0, 1, -65534, 65535, 1, -65534, 65534, 1, -65534, 65533, 1, -3, 65533, 1, -3, 2, 1, -65534, 2, 1, -4, 65532, 1, -3, 65532, 1, -2, 65532, 1, -1, 65532, 1, -65536, 65532, 1, -65535, 65532, 1, -65534, 65532, 1, -65533, 65532, 1, -65532, 65532, 1, -65531, 65532, 1, -65531, 65533, 1, -65532, 65533, 1, -65532, 65534, 1, -65532, 65535, 1, -65531, 65535, 1, -65531, 65534, 1, -65533, 65535, 1, -65533, 0, 1, -65533, 1, 1, -65533, 2, 1, -65532, 1, 1, -65532, 0, 1, -65533, 65533, 1, -65531, 1, 1, -65531, 2, 1, -65531, 0, 1, -65531, 3, 1, -65532, 2, 1, -65533, 65534, 1, -65532, 3, 1, -65533, 3, 1, -65534, 3, 1, -65535, 3, 1, -65536, 3, 1, -1, 3, 1, -2, 3, 1, -3, 3, 1, -4, 3, 1, -4, 2, 1, -4, 1, 1, -4, 0, 1, -4, 65535, 1, -4, 65534, 1, -4, 65533, 1, -5, 65532, 1, -5, 65533, 1, -5, 65534, 1, -5, 65535, 1, -5, 0, 1, -5, 1, 1, -5, 2, 1, -5, 3, 1, -6, 3, 1, -6, 2, 1, -6, 1, 1, -6, 0, 1, -6, 65535, 1, -6, 65534, 1, -6, 65533, 1, -6, 65532, 1)
+}
+metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35.9317, 0)
+fov = 20.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7fy1y")
+
+[node name="NumberedCube3D" parent="." instance=ExtResource("2_anpve")]

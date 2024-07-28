@@ -1,0 +1,75 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://dk4mbtlo3ib5f"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_mdnx1"]
+default_input_values = [0, Vector2(2, 2), 1, Vector2(1, 1)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_wmf1e"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_tfv46"]
+input_name = "camera_direction_world"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_y51tv"]
+input_name = "camera_direction_world"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_1g1dd"]
+parameter_name = "FaceTexture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_vc3xw"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3fli4"]
+input_name = "view_matrix"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_a553a"]
+input_name = "screen_uv"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D FaceTexture;
+
+
+
+void fragment() {
+// Input:11
+	vec2 n_out11p0 = UV;
+
+
+// VectorOp:10
+	vec2 n_in10p0 = vec2(2.00000, 2.00000);
+	vec2 n_out10p0 = n_in10p0 * n_out11p0;
+
+
+	vec4 n_out6p0;
+// Texture2D:6
+	n_out6p0 = texture(FaceTexture, n_out10p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out6p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-1391.56, -29.9345)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_y51tv")
+nodes/fragment/2/position = Vector2(-1680, 400)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_1g1dd")
+nodes/fragment/5/position = Vector2(-900, 560)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_vc3xw")
+nodes/fragment/6/position = Vector2(-269.469, 382.106)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_3fli4")
+nodes/fragment/8/position = Vector2(-1080, 360)
+nodes/fragment/9/node = SubResource("VisualShaderNodeInput_a553a")
+nodes/fragment/9/position = Vector2(-1140, 100)
+nodes/fragment/10/node = SubResource("VisualShaderNodeVectorOp_mdnx1")
+nodes/fragment/10/position = Vector2(-580, 140)
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_wmf1e")
+nodes/fragment/11/position = Vector2(-1240, 240)
+nodes/fragment/12/node = SubResource("VisualShaderNodeInput_tfv46")
+nodes/fragment/12/position = Vector2(-960, 0)
+nodes/fragment/connections = PackedInt32Array(5, 0, 6, 2, 6, 0, 0, 0, 11, 0, 10, 1, 10, 0, 6, 0)

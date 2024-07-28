@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://rjicofp54loh"]
+
+[ext_resource type="Script" path="res://scripts/TileCanvas.gd" id="1_g1bct"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mffsm"]
+font_size = 128
+
+[node name="TileCanvas" type="CanvasLayer"]
+script = ExtResource("1_g1bct")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 256.0
+offset_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.375494, 0.712109, 0.405744, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 256.0
+offset_bottom = 256.0
+size_flags_vertical = 1
+text = "69"
+label_settings = SubResource("LabelSettings_mffsm")
+horizontal_alignment = 1
+vertical_alignment = 1

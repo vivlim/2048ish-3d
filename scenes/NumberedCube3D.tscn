@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://c44kyuicrnvbt"]
+
+[ext_resource type="Script" path="res://scripts/NumberedCube3D.gd" id="1_4bivt"]
+[ext_resource type="Script" path="res://scripts/TileBody.gd" id="2_u1gma"]
+[ext_resource type="Texture2D" uid="uid://bc5bp0hxnilf2" path="res://materials/NumberViewportTexture.tres" id="2_wuovv"]
+[ext_resource type="PackedScene" uid="uid://rjicofp54loh" path="res://scenes/TileCanvas.tscn" id="3_c8ii3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_36h1o"]
+viewport_path = NodePath("Tile/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg4kb"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_36h1o")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1cjxk"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_pg4kb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52l8r"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_wuovv")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r1pvn"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="NumberedCube3D" type="Node3D"]
+script = ExtResource("1_4bivt")
+
+[node name="Tile" type="RigidBody3D" parent="." node_paths=PackedStringArray("mesh", "canvas")]
+script = ExtResource("2_u1gma")
+Value = 11
+mesh = NodePath("MeshInstance3D")
+canvas = NodePath("SubViewport/TileCanvas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tile"]
+mesh = SubResource("BoxMesh_1cjxk")
+surface_material_override/0 = SubResource("StandardMaterial3D_52l8r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tile"]
+shape = SubResource("ConvexPolygonShape3D_r1pvn")
+
+[node name="SubViewport" type="SubViewport" parent="Tile"]
+size = Vector2i(256, 256)
+
+[node name="TileCanvas" parent="Tile/SubViewport" instance=ExtResource("3_c8ii3")]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://i66arqlnkkyh"]
+
+[ext_resource type="Script" path="res://scripts/TileBody.gd" id="1_xu8gp"]
+[ext_resource type="Texture2D" uid="uid://bc5bp0hxnilf2" path="res://materials/NumberViewportTexture.tres" id="2_f6ura"]
+[ext_resource type="PackedScene" uid="uid://rjicofp54loh" path="res://scenes/TileCanvas.tscn" id="3_u0hw8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1cjxk"]
+lightmap_size_hint = Vector2i(14, 21)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52l8r"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_f6ura")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r1pvn"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Tile" type="RigidBody3D" node_paths=PackedStringArray("mesh", "canvas")]
+script = ExtResource("1_xu8gp")
+Value = 11
+mesh = NodePath("MeshInstance3D")
+canvas = NodePath("SubViewport/TileCanvas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1cjxk")
+surface_material_override/0 = SubResource("StandardMaterial3D_52l8r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_r1pvn")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(256, 256)
+
+[node name="TileCanvas" parent="SubViewport" instance=ExtResource("3_u0hw8")]
