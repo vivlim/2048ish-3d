@@ -6,6 +6,10 @@ extends Node
 @export var tile_scene: Resource
 
 @export var lock_rotation: bool = true
+@export var constraint_cardinal_directions: bool = true
+@export var constraint_integer_grid: bool = true
+var constraint_integer_grid_correction_speed = 2
+@export var constraint_tiles_move_in_input_direction: bool = true
 var debug_labels := {}
 
 var last_accepted_input: Vector3 = Vector3.ZERO
@@ -54,7 +58,6 @@ func _physics_process(delta):
 			var rb: RigidBody3D = access_rigidbody(c)
 			if rb is RigidBody3D:
 				num_tiles += 1
-				rb.constant_force = Vector3.ZERO
 				#if !rb.is_sleeping():
 				if rb.linear_velocity.length() > 0.001:
 					num_moving_tiles += 1
@@ -75,7 +78,8 @@ func _physics_process(delta):
 		for c in self.get_children():
 			var rb: RigidBody3D = access_rigidbody(c)
 			if rb is RigidBody3D:
-				rb.apply_impulse(buffered_input * move_speed)
+				apply_constraints(rb)
+				rb.apply_impulse_custom(buffered_input * move_speed)
 		last_accepted_input = buffered_input
 		# must consume the buffered_input
 		buffered_input = Vector3.ZERO
@@ -136,6 +140,8 @@ func spawn_new_tile():
 		new_position.x = rng.randf_range(min_x, max_x)
 		new_position.y = rng.randf_range(min_y, max_y)
 		new_position.z = rng.randf_range(min_z, max_z)
+		if constraint_integer_grid:
+			new_position = round_xz(new_position) # grid, assume that a tile is 1 unit
 		#print("trying to place tile at " + str(new_position) + ", attempt: " + str(attempts_remaining))
 		if check_space_empty(new_position):
 			var new_tile = tile_scene.instantiate() as Node3D
@@ -150,8 +156,7 @@ func spawn_new_tile():
 func setup_new_tile(new_tile: Node3D):
 	var rb: RigidBody3D = access_rigidbody(new_tile)
 	if rb is RigidBody3D:
-		rb.lock_rotation = self.lock_rotation
-
+		apply_constraints(rb)
 
 	# test it's a valid location
 
@@ -173,3 +178,12 @@ func check_space_empty(position: Vector3):
 		if result:
 			return false # a ray hit something
 	return true
+
+func apply_constraints(rb: RigidBody3D):
+	rb.lock_rotation = self.lock_rotation
+	rb.constraint_tiles_move_in_input_direction = constraint_tiles_move_in_input_direction
+	rb.constraint_cardinal_directions = constraint_cardinal_directions
+	rb.constraint_integer_grid = constraint_cardinal_directions
+
+func round_xz(vec3: Vector3):
+	return Vector3(round(vec3.x), vec3.y, round(vec3.z))
