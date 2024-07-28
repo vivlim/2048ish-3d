@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi1cnhg2s8vqs"]
+[gd_scene load_steps=9 format=3 uid="uid://bi1cnhg2s8vqs"]
 
 [ext_resource type="ArrayMesh" uid="uid://5e54aauf2ivw" path="res://assets/unit-pocket.obj" id="1_6weml"]
 [ext_resource type="ArrayMesh" uid="uid://brvse2qf5r4ly" path="res://assets/filled-space.obj" id="2_l8qoi"]
@@ -7,6 +7,11 @@
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fpxnw"]
 points = PackedVector3Array(1.19265, 1, 1.19241, -1.23112, -0.25, -1.23088, -1.23112, -0.25, 1.23088, 1.23112, -0.25, -1.23088, -1.19265, 1, -1.19241, 1.23112, -0.25, 1.23088, -1.19265, 1, 1.19241, 1.19265, 1, -1.19241)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eebec"]
+resource_local_to_scene = true
+diffuse_mode = 3
+albedo_color = Color(0.347068, 0.347068, 0.347068, 1)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bg0wa"]
 data = PackedVector3Array(-1, 1, 1, -1, -0.25, 1, -1, 1, -1, -1, 1, -1, -1, -0.25, 1, -1, -0.25, -1, -1, 1, -1, -1, -0.25, -1, 1, 1, -1, 1, 1, -1, -1, -0.25, -1, 1, -0.25, -1, 1, 1, -1, 1, -0.25, -1, 1, 1, 1, 1, 1, 1, 1, -0.25, -1, 1, -0.25, 1, 1, 1, 1, 1, -0.25, 1, -1, 1, 1, -1, 1, 1, 1, -0.25, 1, -1, -0.25, 1, 1, -0.25, -1, -1, -0.25, -1, 1, -0.25, 1, 1, -0.25, 1, -1, -0.25, -1, -1, -0.25, 1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1)
@@ -28,7 +33,7 @@ shape = SubResource("ConvexPolygonShape3D_fpxnw")
 [node name="FilledSpace" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0868461, 0, 3.05889)
 mesh = ExtResource("2_l8qoi")
-surface_material_override/0 = ExtResource("2_wvk8i")
+surface_material_override/0 = SubResource("StandardMaterial3D_eebec")
 
 [node name="FilledSpaceBody" type="StaticBody3D" parent="FilledSpace"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0868461, 0, -3.05889)
