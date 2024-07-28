@@ -65,4 +65,3 @@ func check_tile_travelling_toward(source_tile: RigidBody3D, target_tile: RigidBo
 				return true
 	return false
 			
-

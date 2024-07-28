@@ -3,6 +3,7 @@ extends Node
 @export var SpawnField: MeshInstance3D
 @export var debug_label: Label
 @export var camera: Camera3D
+@export var tile_scene: Resource
 
 @export var lock_rotation: bool = true
 var debug_labels := {}
@@ -15,8 +16,6 @@ var waiting_for_settle: bool = true
 var time_since_move: float = 0.0
 @export var wait_period = 0.05
 @export var start_damping_after = 0.5
-
-var tile_scene = preload("res://scenes/NumberedCube3d.tscn")
 
 var move_speed := 30
 
@@ -174,5 +173,3 @@ func check_space_empty(position: Vector3):
 		if result:
 			return false # a ray hit something
 	return true
-
-

@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvyfx8rvlm222"]
+[gd_scene load_steps=12 format=3 uid="uid://cvyfx8rvlm222"]
 
+[ext_resource type="PackedScene" uid="uid://c44kyuicrnvbt" path="res://scenes/NumberedCube3D.tscn" id="2_76kwu"]
 [ext_resource type="Script" path="res://scripts/PlayerController.gd" id="3_r4ntg"]
 [ext_resource type="ArrayMesh" uid="uid://5e54aauf2ivw" path="res://assets/unit-pocket.obj" id="4_ec7tt"]
 [ext_resource type="Material" uid="uid://cuokyueyk2jc3" path="res://materials/tiles.tres" id="5_popat"]
@@ -40,6 +41,7 @@ script = ExtResource("3_r4ntg")
 SpawnField = NodePath("../SpawnVolume")
 debug_label = NodePath("../CanvasLayer/Label")
 camera = NodePath("../Camera3D")
+tile_scene = ExtResource("2_76kwu")
 
 [node name="SpawnVolume" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0144377, 0)

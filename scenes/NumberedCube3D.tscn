@@ -2,30 +2,30 @@
 
 [ext_resource type="Script" path="res://scripts/NumberedCube3D.gd" id="1_4bivt"]
 [ext_resource type="Script" path="res://scripts/TileBody.gd" id="2_u1gma"]
-[ext_resource type="Texture2D" uid="uid://bc5bp0hxnilf2" path="res://materials/NumberViewportTexture.tres" id="2_wuovv"]
+[ext_resource type="ArrayMesh" uid="uid://b04la8vf5gv0o" path="res://assets/beveled-cube.obj" id="3_01tl7"]
 [ext_resource type="PackedScene" uid="uid://rjicofp54loh" path="res://scenes/TileCanvas.tscn" id="3_c8ii3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_54ggr"]
 friction = 0.3
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_36h1o"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_y0bx8"]
 viewport_path = NodePath("Tile/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg4kb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc7qx"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_36h1o")
-
-[sub_resource type="BoxMesh" id="BoxMesh_1cjxk"]
-lightmap_size_hint = Vector2i(14, 21)
-material = SubResource("StandardMaterial3D_pg4kb")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52l8r"]
-resource_local_to_scene = true
-albedo_texture = ExtResource("2_wuovv")
+albedo_texture = SubResource("ViewportTexture_y0bx8")
 uv1_offset = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6fn2w"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mv028"]
+points = PackedVector3Array(-0.435892, -0.435891, -0.498217, 0.435814, 0.435834, 0.498152, -0.43586, 0.435859, 0.49818, -0.435892, 0.498216, -0.43589, 0.49814, -0.435928, -0.435928, -0.435861, -0.498181, 0.43586, 0.435815, 0.435835, -0.498153, 0.435845, -0.435866, 0.498188, -0.49812, -0.435891, 0.435891, 0.435814, 0.498152, 0.435834, 0.435846, -0.498189, -0.435866, 0.498069, 0.435866, 0.435866, -0.49812, 0.435891, -0.435891, 0.435845, 0.498188, -0.435866, -0.435892, -0.43589, 0.498216, -0.435892, -0.498217, -0.435891, -0.43586, 0.49818, 0.435859, 0.498105, -0.435897, 0.435897, -0.435861, 0.43586, -0.498181, -0.498155, -0.435922, -0.435922, 0.498105, 0.435897, -0.435897, 0.435846, -0.435866, -0.498189, 0.435815, -0.498153, 0.435835, -0.498084, 0.43586, 0.43586)
+
+[sub_resource type="Gradient" id="Gradient_rlwew"]
+offsets = PackedFloat32Array(0, 0.141631, 0.317597, 0.467811, 0.587983, 0.725322, 0.849785)
+colors = PackedColorArray(0.293004, 0.568167, 0.184083, 1, 0.209904, 0.557036, 0.49295, 1, 0.391228, 0.479256, 0.723309, 1, 0.640878, 0.35137, 0.722174, 1, 0.742135, 0.340179, 0.429092, 1, 0.694044, 0.408188, 0.204452, 1, 0.519366, 0.503561, 0.218254, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dl5xr"]
+gradient = SubResource("Gradient_rlwew")
 
 [node name="NumberedCube3D" type="Node3D" node_paths=PackedStringArray("rigid_body")]
 script = ExtResource("1_4bivt")
@@ -34,23 +34,24 @@ rigid_body = NodePath("Tile")
 [node name="Tile" type="RigidBody3D" parent="." node_paths=PackedStringArray("mesh", "canvas")]
 mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_54ggr")
-max_contacts_reported = 5
 contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("2_u1gma")
 Value = 11
 mesh = NodePath("MeshInstance3D")
 canvas = NodePath("SubViewport/TileCanvas")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tile"]
-mesh = SubResource("BoxMesh_1cjxk")
-surface_material_override/0 = SubResource("StandardMaterial3D_52l8r")
+mesh = ExtResource("3_01tl7")
+surface_material_override/0 = SubResource("StandardMaterial3D_sc7qx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tile"]
-shape = SubResource("BoxShape3D_6fn2w")
+shape = SubResource("ConvexPolygonShape3D_mv028")
 
 [node name="SubViewport" type="SubViewport" parent="Tile"]
 size = Vector2i(256, 256)
 
 [node name="TileCanvas" parent="Tile/SubViewport" instance=ExtResource("3_c8ii3")]
+Colors = SubResource("GradientTexture1D_dl5xr")
 
 [connection signal="body_entered" from="Tile" to="." method="_on_tile_body_entered"]
