@@ -1,0 +1,140 @@
+[gd_scene load_steps=8 format=3 uid="uid://dd3v4157jt1lk"]
+
+[ext_resource type="StyleBox" uid="uid://drsb7b4e33cyt" path="res://ui/styles/slide_in_panel_left.tres" id="1_0bm0j"]
+[ext_resource type="Script" path="res://scripts/ui_closable_panel.gd" id="1_al2en"]
+[ext_resource type="Theme" uid="uid://cfmt4wau2hcnk" path="res://ui/styles/purple_theme.tres" id="2_r63ab"]
+[ext_resource type="FontFile" uid="uid://ccjobdu104wx6" path="res://assets/external/comic-relief/ComicRelief-Bold.woff2" id="3_yohjh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkpe1"]
+content_margin_left = 9.0
+content_margin_top = 6.0
+content_margin_right = 9.0
+content_margin_bottom = 2.0
+bg_color = Color(0.592985, 1.93726e-06, 0.142084, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.265569, 4.51226e-07, 0.0433172, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_papt7"]
+content_margin_left = 9.0
+content_margin_top = 6.0
+content_margin_right = 9.0
+content_margin_bottom = 2.0
+bg_color = Color(0.931082, 0.000363339, 0.244963, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.999978, 0.508755, 0.521769, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ayav1"]
+content_margin_left = 9.0
+content_margin_top = 6.0
+content_margin_right = 9.0
+content_margin_bottom = 2.0
+bg_color = Color(0.672199, 1.00112e-05, 0.166179, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.910024, 0.000285415, 0.241007, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[node name="MenuScene" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("1_al2en")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_0bm0j")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_r63ab")
+text = "2048 DX"
+
+[node name="CloseMenuButton" type="Button" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yohjh")
+theme_override_font_sizes/font_size = 31
+theme_override_styles/focus = SubResource("StyleBoxFlat_wkpe1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_papt7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ayav1")
+text = "X"
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_r63ab")
+text = "blah!asdasdasdadsasd"
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CloseMenuButton" to="." method="_on_close_menu_button_pressed"]

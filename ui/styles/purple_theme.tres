@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cfmt4wau2hcnk"]
+
+[ext_resource type="StyleBox" uid="uid://brc7al8topuf0" path="res://ui/styles/button/button_focus.tres" id="1_6o5pn"]
+[ext_resource type="StyleBox" uid="uid://c2je5fp6twdc3" path="res://ui/styles/button/button_hover.tres" id="2_mvls1"]
+[ext_resource type="StyleBox" uid="uid://dawnbyrrrd180" path="res://ui/styles/button/button_normal.tres" id="3_8m2kc"]
+[ext_resource type="StyleBox" uid="uid://c5ycscni3rvge" path="res://ui/styles/button/button_pressed.tres" id="4_jivc1"]
+[ext_resource type="FontFile" uid="uid://ccjobdu104wx6" path="res://assets/external/comic-relief/ComicRelief-Bold.woff2" id="5_ytspw"]
+
+[resource]
+default_font = ExtResource("5_ytspw")
+default_font_size = 24
+Button/constants/outline_size = 4
+Button/styles/focus = ExtResource("1_6o5pn")
+Button/styles/hover = ExtResource("2_mvls1")
+Button/styles/normal = ExtResource("3_8m2kc")
+Button/styles/pressed = ExtResource("4_jivc1")
