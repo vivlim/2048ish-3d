@@ -11,6 +11,7 @@ extends Node
 var constraint_integer_grid_correction_speed = 2
 @export var constraint_tiles_move_in_input_direction: bool = true
 var debug_labels := {}
+@export var number_to_spawn_per_move: int = 1
 
 var last_accepted_input: Vector3 = Vector3.ZERO
 var last_seen_input: Vector3 = Vector3.ZERO # used for debouncing
@@ -25,10 +26,15 @@ var move_speed := 30
 
 @onready var rng = RandomNumberGenerator.new()
 
+const initial_values = [1,2,4,8]
+const initial_values_weights_unpacked = [4.0, 2.0, 1.0, 0.5]
+@onready var initial_value_weights = PackedFloat32Array(initial_values_weights_unpacked)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SpawnField.hide()
-	spawn_new_tile()
+	for i in range(number_to_spawn_per_move):
+		spawn_new_tile()
 
 
 func debug_label_float(lname, value: float):
@@ -66,7 +72,8 @@ func _physics_process(delta):
 #						rb.angular_velocity = lerp(rb.angular_velocity, Vector3.ZERO, 0.7)
 		if num_moving_tiles == 0 or time_since_move > start_damping_after:
 			waiting_for_settle = false
-			spawn_new_tile()
+			for i in range(number_to_spawn_per_move):
+				spawn_new_tile()
 	debug_labels["num_moving_tiles"]= str(num_moving_tiles)
 	debug_labels["num_tiles"]= str(num_tiles)
 			
@@ -157,6 +164,8 @@ func setup_new_tile(new_tile: Node3D):
 	var rb: RigidBody3D = access_rigidbody(new_tile)
 	if rb is RigidBody3D:
 		apply_constraints(rb)
+
+	new_tile.Value = initial_values[rng.rand_weighted(initial_value_weights)]
 
 	# test it's a valid location
 

@@ -45,6 +45,7 @@ lock_rotation = false
 constraint_cardinal_directions = false
 constraint_integer_grid = false
 constraint_tiles_move_in_input_direction = false
+number_to_spawn_per_move = 8
 
 [node name="SpawnVolume" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0144377, 0)
