@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://2xe8umhbmu7e"]
+
+[ext_resource type="Script" path="res://scripts/SimulateInputButton.gd" id="1_58tgs"]
+[ext_resource type="Texture2D" uid="uid://dgs6xqlm50qea" path="res://assets/external/kenney-ui-base-pack/arrow_decorative_n.svg" id="1_f3jqb"]
+[ext_resource type="Texture2D" uid="uid://cik0fcdfxt62m" path="res://assets/external/kenney-ui-base-pack/arrow_decorative_w.svg" id="3_jv55m"]
+[ext_resource type="Texture2D" uid="uid://bjaddyciyxkb6" path="res://assets/external/kenney-ui-base-pack/arrow_decorative_e.svg" id="4_ofbht"]
+[ext_resource type="Texture2D" uid="uid://c36nsjbj3unfq" path="res://assets/external/kenney-ui-base-pack/arrow_decorative_s.svg" id="5_mij0d"]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 2
+alignment_horizontal = 0
+alignment_vertical = 2
+
+[node name="ButtonDirectionalPad" type="GridContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Spacer" type="Control" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Up" type="TextureButton" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+texture_normal = ExtResource("1_f3jqb")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_58tgs")
+input_to_send = "up"
+
+[node name="Spacer2" type="Control" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Left" type="TextureButton" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+texture_normal = ExtResource("3_jv55m")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_58tgs")
+input_to_send = "left"
+
+[node name="Spacer3" type="Control" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Right" type="TextureButton" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+texture_normal = ExtResource("4_ofbht")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_58tgs")
+input_to_send = "right"
+
+[node name="Spacer4" type="Control" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Down" type="TextureButton" parent="AspectRatioContainer/ButtonDirectionalPad"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+texture_normal = ExtResource("5_mij0d")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_58tgs")
+input_to_send = "down"
+
+[connection signal="button_down" from="AspectRatioContainer/ButtonDirectionalPad/Up" to="AspectRatioContainer/ButtonDirectionalPad/Up" method="_on_button_down"]
+[connection signal="button_up" from="AspectRatioContainer/ButtonDirectionalPad/Up" to="AspectRatioContainer/ButtonDirectionalPad/Up" method="_on_button_up"]
+[connection signal="button_down" from="AspectRatioContainer/ButtonDirectionalPad/Left" to="AspectRatioContainer/ButtonDirectionalPad/Left" method="_on_button_down"]
+[connection signal="button_up" from="AspectRatioContainer/ButtonDirectionalPad/Left" to="AspectRatioContainer/ButtonDirectionalPad/Left" method="_on_button_up"]
+[connection signal="button_down" from="AspectRatioContainer/ButtonDirectionalPad/Right" to="AspectRatioContainer/ButtonDirectionalPad/Right" method="_on_button_down"]
+[connection signal="button_up" from="AspectRatioContainer/ButtonDirectionalPad/Right" to="AspectRatioContainer/ButtonDirectionalPad/Right" method="_on_button_up"]
+[connection signal="button_down" from="AspectRatioContainer/ButtonDirectionalPad/Down" to="AspectRatioContainer/ButtonDirectionalPad/Down" method="_on_button_down"]
+[connection signal="button_up" from="AspectRatioContainer/ButtonDirectionalPad/Down" to="AspectRatioContainer/ButtonDirectionalPad/Down" method="_on_button_up"]

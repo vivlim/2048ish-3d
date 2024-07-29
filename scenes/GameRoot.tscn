@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct2q6kcukwinf"]
+
+[ext_resource type="Script" path="res://scripts/game_root.gd" id="1_7b507"]
+[ext_resource type="PackedScene" uid="uid://cvyfx8rvlm222" path="res://scenes/Main.tscn" id="2_6chun"]
+
+[node name="GameRoot" type="Node3D" node_paths=PackedStringArray("stage_target")]
+script = ExtResource("1_7b507")
+stages = Array[PackedScene]([ExtResource("2_6chun")])
+stage_target = NodePath("CurrentStage")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CurrentStage" type="Node3D" parent="."]

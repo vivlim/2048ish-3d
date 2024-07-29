@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvyfx8rvlm222"]
+[gd_scene load_steps=14 format=3 uid="uid://cvyfx8rvlm222"]
 
 [ext_resource type="PackedScene" uid="uid://c44kyuicrnvbt" path="res://scenes/NumberedCube3D.tscn" id="2_76kwu"]
 [ext_resource type="Script" path="res://scripts/PlayerController.gd" id="3_r4ntg"]
 [ext_resource type="ArrayMesh" uid="uid://5e54aauf2ivw" path="res://assets/unit-pocket.obj" id="4_ec7tt"]
+[ext_resource type="Script" path="res://scripts/touch_ui_root.gd" id="5_htj02"]
+[ext_resource type="PackedScene" uid="uid://2xe8umhbmu7e" path="res://scenes/controls/button_directional_pad.tscn" id="5_iuyhc"]
 [ext_resource type="Material" uid="uid://cuokyueyk2jc3" path="res://materials/tiles.tres" id="5_popat"]
 
 [sub_resource type="Environment" id="Environment_7fy1y"]
@@ -56,6 +58,40 @@ skeleton = NodePath("")
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
+text = "debug text"
+
+[node name="ConstraintControls" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -257.0
+offset_bottom = 142.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="RotationCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "disable rotation"
+
+[node name="IntegerGridCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "integer grid"
+
+[node name="TilesMoveInInputDirectionCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "tiles move in input direction"
+
+[node name="CardinalDirectionsCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "cardinal directions"
 
 [node name="UnitPocket" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.5, 0, 0, 0, 2, 0, 0, 0, 3.5, 0, -1, 0)
@@ -79,3 +115,37 @@ mesh = SubResource("PlaneMesh_k0h8w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_50bjh")
+
+[node name="OnscreenDirectionalControls" type="CanvasLayer" parent="."]
+
+[node name="ScreenUIGrid" type="GridContainer" parent="OnscreenDirectionalControls"]
+modulate = Color(1, 1, 1, 0.509804)
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+script = ExtResource("5_htj02")
+
+[node name="Spacer" type="Control" parent="OnscreenDirectionalControls/ScreenUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer2" type="Control" parent="OnscreenDirectionalControls/ScreenUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ButtonDirectionalPad" parent="OnscreenDirectionalControls/ScreenUIGrid" instance=ExtResource("5_iuyhc")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="toggled" from="CanvasLayer/ConstraintControls/RotationCheckbox" to="PlayerController" method="_on_rotation_checkbox_toggled"]
+[connection signal="toggled" from="CanvasLayer/ConstraintControls/IntegerGridCheckbox" to="PlayerController" method="_on_integer_grid_checkbox_toggled"]
+[connection signal="toggled" from="CanvasLayer/ConstraintControls/TilesMoveInInputDirectionCheckbox" to="PlayerController" method="_on_tiles_move_in_input_direction_checkbox_toggled"]
+[connection signal="toggled" from="CanvasLayer/ConstraintControls/CardinalDirectionsCheckbox" to="PlayerController" method="_on_cardinal_directions_checkbox_toggled"]
+[connection signal="resized" from="OnscreenDirectionalControls/ScreenUIGrid" to="OnscreenDirectionalControls/ScreenUIGrid" method="_on_resized"]

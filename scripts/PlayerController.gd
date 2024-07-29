@@ -3,7 +3,7 @@ extends Node
 @export var SpawnField: MeshInstance3D
 @export var debug_label: Label
 @export var camera: Camera3D
-@export var tile_scene: Resource
+@export var tile_scene: PackedScene
 
 @export var lock_rotation: bool = true
 @export var constraint_cardinal_directions: bool = true
@@ -187,3 +187,19 @@ func apply_constraints(rb: RigidBody3D):
 
 func round_xz(vec3: Vector3):
 	return Vector3(round(vec3.x), vec3.y, round(vec3.z))
+
+
+func _on_rotation_checkbox_toggled(toggled_on: bool) -> void:
+	lock_rotation = toggled_on
+
+
+func _on_integer_grid_checkbox_toggled(toggled_on: bool) -> void:
+	constraint_integer_grid = toggled_on
+
+
+func _on_tiles_move_in_input_direction_checkbox_toggled(toggled_on: bool) -> void:
+	constraint_tiles_move_in_input_direction = toggled_on
+
+
+func _on_cardinal_directions_checkbox_toggled(toggled_on: bool) -> void:
+	constraint_cardinal_directions = toggled_on
