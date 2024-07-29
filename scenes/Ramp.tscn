@@ -1,0 +1,151 @@
+[gd_scene load_steps=16 format=4 uid="uid://b84xg6yu65p5d"]
+
+[ext_resource type="Script" path="res://scripts/PlayerController.gd" id="1_ry57e"]
+[ext_resource type="PackedScene" uid="uid://c44kyuicrnvbt" path="res://scenes/NumberedCube3D.tscn" id="2_mml4k"]
+[ext_resource type="Material" uid="uid://cuokyueyk2jc3" path="res://materials/tiles.tres" id="4_64r21"]
+[ext_resource type="Script" path="res://scripts/touch_ui_root.gd" id="5_qjphi"]
+[ext_resource type="PackedScene" uid="uid://2xe8umhbmu7e" path="res://scenes/controls/button_directional_pad.tscn" id="6_w4ov2"]
+
+[sub_resource type="Environment" id="Environment_7fy1y"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ym756"]
+albedo_color = Color(1, 0.207843, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_01di0"]
+size = Vector3(4.925, 0.1, 4.69)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w5cnb"]
+_surfaces = [{
+"aabb": AABB(-1.25, -0.25, -1.25, 2.5, 1.25001, 2.50001),
+"attribute_data": PackedByteArray("AAAgPwAAgD8AAMA+AACAPwAAID8AAEA/AADAPgAAQD8AACA/AABAPwAAwD4AAEA/AAAgPwAAAD8AAMA+AAAAPwAAID8AAAA/AADAPgAAAD8AACA/AACAPgAAwD4AAIA+AAAgPwAAgD4AAMA+AACAPgAAID8AAAAAAADAPgAAAAAAAMA+AAAAPwAAAD4AAAA/AADAPgAAgD4AAAA+AACAPgAAID8AAAA/AAAgPwAAgD4AACA/AAAAPwAAID8AAIA+AABgPwAAAD8AAGA/AACAPgAAYD8AAAA/AABgPwAAgD4AACA/AAAAPwAAID8AAAA/AAAgPwAAgD4AACA/AACAPgAAYD8AAAA/AAAgPwAAAD8AAGA/AACAPgAAID8AAIA+AABgPwAAgD4AAGA/AAAAPwAAYD8AAIA+AABgPwAAAD8AACA/AACAPgAAYD8AAIA+AAAgPwAAgD4AAGA/AACAPgAAYD8AAAA/AAAgPwAAAD8AAGA/AAAAPwAAID8AAAA/"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAYAB0AHQAYABoAHgAcAB8AHwAcAB0AGQAeABsAGwAeAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8A"),
+"name": "Pocket",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AACgvwAAgD8AAKA/AACgvwAAgL4AAKA/AACgvwAAgD8AAKC/AACgvwAAgL4AAKC/AACgvwAAgD8AAKC/AACgvwAAgL4AAKC/AACgPwAAgD8AAKC/AACgPwAAgL4AAKC/AACgPwAAgD8AAKC/AACgPwAAgL4AAKC/AACgPwAAgD8AAKA/AACgPwAAgL4AAKA/AACgPwAAgD8AAKA/AACgPwAAgL4AAKA/AACgvwAAgD8AAKA/AACgvwAAgL4AAKA/AACgPwAAgL4AAKC/AACgvwAAgL4AAKC/AACgPwAAgL4AAKA/AACgvwAAgL4AAKA/AACAPwAAgD8AAIC/AACAPwAAgD8AAIA/AACAPwAAAAAAAIC/AACAPwAAAAAAAIA/AACAvwAAgD8AAIC/AACAvwAAgD8AAIA/AACgvwAAgD8AAKC/AACgvwAAgD8AAKA/AACAPwAAgD8AAIC/AACgPwAAgD8AAKC/AACAPwAAgD8AAIA/AACgPwAAgD8AAKA/AACAvwAAAAAAAIC/AACAPwAAAAAAAIC/AACAvwAAAAAAAIA/AACAPwAAAAAAAIA/AACAvwAAgD8AAIA/AACAvwAAgD8AAIC/AACAvwAAAAAAAIA/AACAvwAAAAAAAIC/AACAPwAAgD8AAIA/AACAvwAAgD8AAIA/AACAPwAAAAAAAIA/AACAvwAAAAAAAIA/AACAvwAAgD8AAIC/AACAPwAAgD8AAIC/AACAvwAAAAAAAIC/AACAPwAAAAAAAIC/AAD/f/9///8AAP9//3///wAA/3//f///AAD/f/9//////////3//////////f/////////9//////////3///////3//f///////f/9///////9//3///////3//f////3//f/9/////f/9//3////9//3//f////3//f/9/////fwAA////v/9/AAD///+//38AAP///7//fwAA////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/////f////7////9/////v////3////+/////f////7//////////v/////////+//////////7//////////v/9//3////8//3//f////z//f/9/////P/9//3////8/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nt3wt"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t6xti"]
+data = PackedVector3Array(-1.25, 1, 1.25, -1.25, -0.25, 1.25, -1.25, 1, -1.25, -1.25, 1, -1.25, -1.25, -0.25, 1.25, -1.25, -0.25, -1.25, -1.25, 1, -1.25, -1.25, -0.25, -1.25, 1.25, 1, -1.25, 1.25, 1, -1.25, -1.25, -0.25, -1.25, 1.25, -0.25, -1.25, 1.25, 1, -1.25, 1.25, -0.25, -1.25, 1.25, 1, 1.25, 1.25, 1, 1.25, 1.25, -0.25, -1.25, 1.25, -0.25, 1.25, 1.25, 1, 1.25, 1.25, -0.25, 1.25, -1.25, 1, 1.25, -1.25, 1, 1.25, 1.25, -0.25, 1.25, -1.25, -0.25, 1.25, 1.25, -0.25, -1.25, -1.25, -0.25, -1.25, 1.25, -0.25, 1.25, 1.25, -0.25, 1.25, -1.25, -0.25, -1.25, -1.25, -0.25, 1.25, 1, 1, -1, 1, 1, 1, 1, 0, -1, 1, 0, -1, 1, 1, 1, 1, 0, 1, -1, 1, -1, -1, 1, 1, -1.25, 1, -1.25, -1.25, 1, -1.25, -1, 1, 1, -1.25, 1, 1.25, 1, 1, -1, -1, 1, -1, 1.25, 1, -1.25, 1.25, 1, -1.25, -1, 1, -1, -1.25, 1, -1.25, 1, 1, 1, 1, 1, -1, 1.25, 1, 1.25, 1.25, 1, 1.25, 1, 1, -1, 1.25, 1, -1.25, -1, 1, 1, 1, 1, 1, -1.25, 1, 1.25, -1.25, 1, 1.25, 1, 1, 1, 1.25, 1, 1.25, -1, 0, -1, 1, 0, -1, -1, 0, 1, -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 1, 1, -1, 1, -1, -1, 0, 1, -1, 0, 1, -1, 1, -1, -1, 0, -1, 1, 1, 1, -1, 1, 1, 1, 0, 1, 1, 0, 1, -1, 1, 1, -1, 0, 1, -1, 1, -1, 1, 1, -1, -1, 0, -1, -1, 0, -1, 1, 1, -1, 1, 0, -1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ea8ug"]
+left_to_right = 0.0
+size = Vector3(1.5, 1.25, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_f6q7k"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xo72a"]
+size = Vector3(0.5, 20, 9)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cuwp5"]
+data = PackedVector3Array(-0.25, 10, 4.5, 0.25, 10, 4.5, -0.25, -10, 4.5, 0.25, 10, 4.5, 0.25, -10, 4.5, -0.25, -10, 4.5, 0.25, 10, -4.5, -0.25, 10, -4.5, 0.25, -10, -4.5, -0.25, 10, -4.5, -0.25, -10, -4.5, 0.25, -10, -4.5, 0.25, 10, 4.5, 0.25, 10, -4.5, 0.25, -10, 4.5, 0.25, 10, -4.5, 0.25, -10, -4.5, 0.25, -10, 4.5, -0.25, 10, -4.5, -0.25, 10, 4.5, -0.25, -10, -4.5, -0.25, 10, 4.5, -0.25, -10, 4.5, -0.25, -10, -4.5, 0.25, 10, 4.5, -0.25, 10, 4.5, 0.25, 10, -4.5, -0.25, 10, 4.5, -0.25, 10, -4.5, 0.25, 10, -4.5, -0.25, -10, 4.5, 0.25, -10, 4.5, -0.25, -10, -4.5, 0.25, -10, 4.5, 0.25, -10, -4.5, -0.25, -10, -4.5)
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.556687, 0.830722, 0, -0.830722, 0.556687, 4.83217, 14.6486, 12.9636)
+fov = 40.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7fy1y")
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("SpawnField", "debug_label", "camera")]
+script = ExtResource("1_ry57e")
+SpawnField = NodePath("../SpawnVolume")
+debug_label = NodePath("../OnscreenDirectionalControls/ScreenUIGrid/Label")
+camera = NodePath("../Camera3D")
+tile_scene = ExtResource("2_mml4k")
+lock_rotation = false
+constraint_cardinal_directions = false
+constraint_integer_grid = false
+constraint_tiles_move_in_input_direction = false
+
+[node name="SpawnVolume" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.375824, 0)
+material_override = SubResource("StandardMaterial3D_ym756")
+transparency = 0.66
+cast_shadow = 0
+mesh = SubResource("BoxMesh_01di0")
+skeleton = NodePath("")
+
+[node name="UnitPocket" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 0.7, 0, 0, 0, 2.5, 0, -1.42008, 0)
+mesh = SubResource("ArrayMesh_w5cnb")
+surface_material_override/0 = ExtResource("4_64r21")
+
+[node name="UnitPocketBody" type="StaticBody3D" parent="UnitPocket"]
+physics_material_override = SubResource("PhysicsMaterial_nt3wt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UnitPocket/UnitPocketBody"]
+shape = SubResource("ConcavePolygonShape3D_t6xti")
+
+[node name="UnitPocket2" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.5, 0, 0, 0, 1, 0, 0, 0, 3.5, 8.68745, -3.34436, 0)
+mesh = SubResource("ArrayMesh_w5cnb")
+surface_material_override/0 = ExtResource("4_64r21")
+
+[node name="UnitPocketBody" type="StaticBody3D" parent="UnitPocket2"]
+physics_material_override = SubResource("PhysicsMaterial_nt3wt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UnitPocket2/UnitPocketBody"]
+shape = SubResource("ConcavePolygonShape3D_t6xti")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.825468, -0.0524817, -0.562003, 0.564448, 0.076751, 0.821892, 0, -0.995668, 0.0929788, 0, 9.29493, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.698848, -0.842788, 0)
+mesh = SubResource("PrismMesh_ea8ug")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_f6q7k")
+
+[node name="OnscreenDirectionalControls" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ScreenUIGrid" type="GridContainer" parent="OnscreenDirectionalControls"]
+modulate = Color(1, 1, 1, 0.509804)
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+script = ExtResource("5_qjphi")
+
+[node name="Label" type="Label" parent="OnscreenDirectionalControls/ScreenUIGrid"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "debug text"
+
+[node name="Spacer2" type="Control" parent="OnscreenDirectionalControls/ScreenUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ButtonDirectionalPad" parent="OnscreenDirectionalControls/ScreenUIGrid" instance=ExtResource("6_w4ov2")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4135, 6.47002, -0.168588)
+mesh = SubResource("BoxMesh_xo72a")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/RigidBody3D"]
+shape = SubResource("ConcavePolygonShape3D_cuwp5")

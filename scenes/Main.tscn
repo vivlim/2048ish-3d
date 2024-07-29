@@ -41,7 +41,7 @@ environment = SubResource("Environment_7fy1y")
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("SpawnField", "debug_label", "camera")]
 script = ExtResource("3_r4ntg")
 SpawnField = NodePath("../SpawnVolume")
-debug_label = NodePath("../CanvasLayer/Label")
+debug_label = NodePath("../OnscreenDirectionalControls/ScreenUIGrid/Label")
 camera = NodePath("../Camera3D")
 tile_scene = ExtResource("2_76kwu")
 
@@ -57,44 +57,6 @@ skeleton = NodePath("")
 layer = 10
 offset = Vector2(400, 0)
 transform = Transform2D(1, 0, 0, 1, 400, 0)
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "debug text"
-
-[node name="ConstraintControls" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -257.0
-offset_bottom = 142.0
-grow_horizontal = 0
-alignment = 2
-
-[node name="RotationCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
-layout_mode = 2
-focus_mode = 1
-button_pressed = true
-text = "disable rotation"
-
-[node name="IntegerGridCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
-layout_mode = 2
-focus_mode = 1
-button_pressed = true
-text = "integer grid"
-
-[node name="TilesMoveInInputDirectionCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
-layout_mode = 2
-focus_mode = 1
-button_pressed = true
-text = "tiles move in input direction"
-
-[node name="CardinalDirectionsCheckbox" type="CheckBox" parent="CanvasLayer/ConstraintControls"]
-layout_mode = 2
-focus_mode = 1
-button_pressed = true
-text = "cardinal directions"
 
 [node name="UnitPocket" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.5, 0, 0, 0, 2, 0, 0, 0, 3.5, 0, -1, 0)
@@ -133,24 +95,53 @@ grow_vertical = 2
 columns = 2
 script = ExtResource("5_htj02")
 
+[node name="Label" type="Label" parent="OnscreenDirectionalControls/ScreenUIGrid"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "debug text"
+
 [node name="Spacer" type="Control" parent="OnscreenDirectionalControls/ScreenUIGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Spacer2" type="Control" parent="OnscreenDirectionalControls/ScreenUIGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="ButtonDirectionalPad" parent="OnscreenDirectionalControls/ScreenUIGrid" instance=ExtResource("5_iuyhc")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="toggled" from="CanvasLayer/ConstraintControls/RotationCheckbox" to="PlayerController" method="_on_rotation_checkbox_toggled"]
-[connection signal="toggled" from="CanvasLayer/ConstraintControls/IntegerGridCheckbox" to="PlayerController" method="_on_integer_grid_checkbox_toggled"]
-[connection signal="toggled" from="CanvasLayer/ConstraintControls/TilesMoveInInputDirectionCheckbox" to="PlayerController" method="_on_tiles_move_in_input_direction_checkbox_toggled"]
-[connection signal="toggled" from="CanvasLayer/ConstraintControls/CardinalDirectionsCheckbox" to="PlayerController" method="_on_cardinal_directions_checkbox_toggled"]
-[connection signal="resized" from="OnscreenDirectionalControls/ScreenUIGrid" to="OnscreenDirectionalControls/ScreenUIGrid" method="_on_resized"]
+[node name="ConstraintControls" type="VBoxContainer" parent="OnscreenDirectionalControls/ScreenUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="RotationCheckbox" type="CheckBox" parent="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "disable rotation"
+
+[node name="IntegerGridCheckbox" type="CheckBox" parent="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "integer grid"
+
+[node name="TilesMoveInInputDirectionCheckbox" type="CheckBox" parent="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "tiles move in input direction"
+
+[node name="CardinalDirectionsCheckbox" type="CheckBox" parent="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls"]
+layout_mode = 2
+focus_mode = 1
+button_pressed = true
+text = "cardinal directions"
+
+[connection signal="toggled" from="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls/RotationCheckbox" to="PlayerController" method="_on_rotation_checkbox_toggled"]
+[connection signal="toggled" from="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls/IntegerGridCheckbox" to="PlayerController" method="_on_integer_grid_checkbox_toggled"]
+[connection signal="toggled" from="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls/TilesMoveInInputDirectionCheckbox" to="PlayerController" method="_on_tiles_move_in_input_direction_checkbox_toggled"]
+[connection signal="toggled" from="OnscreenDirectionalControls/ScreenUIGrid/ConstraintControls/CardinalDirectionsCheckbox" to="PlayerController" method="_on_cardinal_directions_checkbox_toggled"]

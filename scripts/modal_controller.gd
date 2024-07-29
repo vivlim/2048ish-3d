@@ -1,4 +1,5 @@
 extends Control
+class_name ModalController
 
 @export var SettingsScene: PackedScene
 var layers: Array[Control]

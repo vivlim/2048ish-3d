@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd3v4157jt1lk"]
+[gd_scene load_steps=12 format=3 uid="uid://dd3v4157jt1lk"]
 
 [ext_resource type="StyleBox" uid="uid://drsb7b4e33cyt" path="res://ui/styles/slide_in_panel_left.tres" id="1_0bm0j"]
 [ext_resource type="Script" path="res://scripts/ui_closable_panel.gd" id="1_al2en"]
 [ext_resource type="Theme" uid="uid://cfmt4wau2hcnk" path="res://ui/styles/purple_theme.tres" id="2_r63ab"]
+[ext_resource type="FontFile" uid="uid://58y5be5upv0h" path="res://assets/external/comic-relief/ComicRelief-Regular.woff2" id="2_ydxhl"]
 [ext_resource type="FontFile" uid="uid://ccjobdu104wx6" path="res://assets/external/comic-relief/ComicRelief-Bold.woff2" id="3_yohjh"]
+[ext_resource type="Script" path="res://scripts/button_notify_gameroot.gd" id="6_7hwqx"]
+[ext_resource type="Script" path="res://scripts/checkbox_notify_gameroot.gd" id="7_wipnd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkpe1"]
 content_margin_left = 9.0
@@ -65,6 +68,13 @@ shadow_color = Color(0, 0, 0, 0.164706)
 shadow_size = 4
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82o0d"]
+bg_color = Color(0.123851, 0.0210673, 0.142042, 1)
+draw_center = false
+border_width_top = 6
+border_width_bottom = 6
+border_color = Color(0.268541, 0.0771296, 0.30137, 1)
+
 [node name="MenuScene" type="Control"]
 layout_mode = 3
 anchors_preset = 9
@@ -72,6 +82,7 @@ anchor_bottom = 1.0
 offset_right = 300.0
 grow_vertical = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 script = ExtResource("1_al2en")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -79,7 +90,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 25.0
+offset_right = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_top = 16
@@ -96,13 +107,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MarginContainer"]
-clip_contents = false
-layout_mode = 2
-follow_focus = true
-horizontal_scroll_mode = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -111,19 +116,20 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_r63ab")
 text = "2048 DX"
 
-[node name="CloseMenuButton" type="Button" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CloseMenuButton" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_yohjh")
 theme_override_font_sizes/font_size = 31
@@ -132,9 +138,70 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_papt7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ayav1")
 text = "X"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ydxhl")
+text = "stages / modes"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_r63ab")
-text = "blah!asdasdasdadsasd"
+text = "\"normal\" \"2048\""
+script = ExtResource("6_7hwqx")
 
-[connection signal="pressed" from="MarginContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CloseMenuButton" to="." method="_on_close_menu_button_pressed"]
+[node name="Button2" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_r63ab")
+text = "let's ramp things up"
+script = ExtResource("6_7hwqx")
+level_index = 1
+
+[node name="Button3" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_r63ab")
+text = "i'm having a ball"
+script = ExtResource("6_7hwqx")
+level_index = 2
+
+[node name="Panel2" type="Panel" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_82o0d")
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_r63ab")
+theme_override_constants/h_separation = 12
+text = "touch controls"
+script = ExtResource("7_wipnd")
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/CloseMenuButton" to="." method="_on_close_menu_button_pressed"]

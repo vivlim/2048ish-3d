@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://c44kyuicrnvbt"]
+[gd_scene load_steps=11 format=3 uid="uid://5o4yrmtadqde"]
 
-[ext_resource type="Script" path="res://scripts/NumberedCube3D.gd" id="1_4bivt"]
-[ext_resource type="Script" path="res://scripts/TileBody.gd" id="2_u1gma"]
-[ext_resource type="ArrayMesh" uid="uid://b04la8vf5gv0o" path="res://assets/beveled-cube.obj" id="3_01tl7"]
-[ext_resource type="PackedScene" uid="uid://rjicofp54loh" path="res://scenes/TileCanvas.tscn" id="3_c8ii3"]
+[ext_resource type="Script" path="res://scripts/NumberedCube3D.gd" id="1_d450a"]
+[ext_resource type="Script" path="res://scripts/TileBody.gd" id="2_4q6ic"]
+[ext_resource type="PackedScene" uid="uid://rjicofp54loh" path="res://scenes/TileCanvas.tscn" id="4_fv5mb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_54ggr"]
 friction = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_kgslm"]
+radial_segments = 32
+rings = 16
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_y0bx8"]
 viewport_path = NodePath("Tile/SubViewport")
@@ -17,8 +20,8 @@ albedo_texture = SubResource("ViewportTexture_y0bx8")
 uv1_offset = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mv028"]
-points = PackedVector3Array(-0.435892, -0.435891, -0.498217, 0.435814, 0.435834, 0.498152, -0.43586, 0.435859, 0.49818, -0.435892, 0.498216, -0.43589, 0.49814, -0.435928, -0.435928, -0.435861, -0.498181, 0.43586, 0.435815, 0.435835, -0.498153, 0.435845, -0.435866, 0.498188, -0.49812, -0.435891, 0.435891, 0.435814, 0.498152, 0.435834, 0.435846, -0.498189, -0.435866, 0.498069, 0.435866, 0.435866, -0.49812, 0.435891, -0.435891, 0.435845, 0.498188, -0.435866, -0.435892, -0.43589, 0.498216, -0.435892, -0.498217, -0.435891, -0.43586, 0.49818, 0.435859, 0.498105, -0.435897, 0.435897, -0.435861, 0.43586, -0.498181, -0.498155, -0.435922, -0.435922, 0.498105, 0.435897, -0.435897, 0.435846, -0.435866, -0.498189, 0.435815, -0.498153, 0.435835, -0.498084, 0.43586, 0.43586)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_s1iyi"]
+points = PackedVector3Array(0.459371, 0.167613, 0.093536, -0.486595, -0.0915666, -0.0283732, -0.471828, -0.137555, -0.0895161, 0.062738, -0.364045, 0.335654, 0.16801, -0.301748, -0.359974, -0.150295, 0.472534, 0.0476948, -0.0282323, 0.258107, -0.422981, -0.0743582, 0.122383, 0.476297, -0.193711, -0.361567, -0.283985, 0.444937, -0.137379, -0.181136, 0.27387, 0.317081, -0.269599, -0.314235, -0.301267, 0.243078, -0.438366, 0.227818, 0.0627579, 0.0939299, -0.489581, -0.0284257, 0.381153, -0.136423, 0.290164, 0.243176, 0.361753, 0.243196, -0.270987, 0.0909757, -0.407538, 0.0785856, -0.0611418, -0.487323, -0.360767, 0.120967, 0.319547, -0.329577, 0.301572, -0.224012, 0.3357, -0.364009, 0.062665, 0.0478561, 0.472528, -0.150255, 0.275215, 0.0606502, 0.411637, -0.25662, -0.426069, 0.0476178, -0.149608, 0.364211, 0.305578, -0.07436, -0.122386, 0.476308, 0.350053, 0.0756389, -0.345779, 0.260577, 0.425776, -0.0130014, -0.19443, -0.211617, -0.406082, -0.454233, 0.0607989, -0.195479, 0.456634, 0.166609, -0.103886, 0.475923, -0.137516, 0.0479163)
 
 [sub_resource type="Gradient" id="Gradient_rlwew"]
 offsets = PackedFloat32Array(0, 0.141631, 0.317597, 0.467811, 0.587983, 0.725322, 0.849785)
@@ -28,7 +31,7 @@ colors = PackedColorArray(0.293004, 0.568167, 0.184083, 1, 0.209904, 0.557036, 0
 gradient = SubResource("Gradient_rlwew")
 
 [node name="NumberedCube3D" type="Node3D" node_paths=PackedStringArray("rigid_body")]
-script = ExtResource("1_4bivt")
+script = ExtResource("1_d450a")
 rigid_body = NodePath("Tile")
 
 [node name="Tile" type="RigidBody3D" parent="." node_paths=PackedStringArray("mesh", "canvas")]
@@ -37,22 +40,22 @@ physics_material_override = SubResource("PhysicsMaterial_54ggr")
 gravity_scale = 2.0
 contact_monitor = true
 max_contacts_reported = 5
-script = ExtResource("2_u1gma")
+script = ExtResource("2_4q6ic")
 Value = 11
 mesh = NodePath("MeshInstance3D")
 canvas = NodePath("SubViewport/TileCanvas")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tile"]
-mesh = ExtResource("3_01tl7")
+mesh = SubResource("SphereMesh_kgslm")
 surface_material_override/0 = SubResource("StandardMaterial3D_sc7qx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tile"]
-shape = SubResource("ConvexPolygonShape3D_mv028")
+shape = SubResource("ConvexPolygonShape3D_s1iyi")
 
 [node name="SubViewport" type="SubViewport" parent="Tile"]
 size = Vector2i(256, 256)
 
-[node name="TileCanvas" parent="Tile/SubViewport" instance=ExtResource("3_c8ii3")]
+[node name="TileCanvas" parent="Tile/SubViewport" instance=ExtResource("4_fv5mb")]
 Colors = SubResource("GradientTexture1D_dl5xr")
 
 [connection signal="body_entered" from="Tile" to="." method="_on_tile_body_entered"]
