@@ -12,6 +12,7 @@ var constraint_integer_grid_correction_speed = 2
 @export var constraint_tiles_move_in_input_direction: bool = true
 var debug_labels := {}
 @export var number_to_spawn_per_move: int = 1
+@export var require_line_of_sight_to_spawn: bool = true
 
 var last_accepted_input: Vector3 = Vector3.ZERO
 var last_seen_input: Vector3 = Vector3.ZERO # used for debouncing
@@ -178,10 +179,11 @@ func check_space_empty(position: Vector3):
 		PhysicsRayQueryParameters3D.create(position, position + Vector3(distance, 0.0, 0.0)),
 		PhysicsRayQueryParameters3D.create(position, position + Vector3(-distance, 0.0, 0.0)),
 		PhysicsRayQueryParameters3D.create(position, position + Vector3(0.0, distance, 0.0)),
-		PhysicsRayQueryParameters3D.create(position, position + Vector3(0.0, -distance, 0.0)),
-		# make sure that there's a clear line of sight from the camera to it. that'll stop us from spawning stuff inside of walls
-		PhysicsRayQueryParameters3D.create(camera.global_position, position)
+		PhysicsRayQueryParameters3D.create(position, position + Vector3(0.0, -distance, 0.0))
 	]
+	if require_line_of_sight_to_spawn:
+		# make sure that there's a clear line of sight from the camera to it. that'll stop us from spawning stuff inside of walls
+		queries.append(PhysicsRayQueryParameters3D.create(camera.global_position, position))
 	for q in queries:
 		var result = space_state.intersect_ray(q)
 		if result:

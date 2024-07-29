@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjjkf1b8i5fbc"
+path="res://.godot/imported/thinking-hand.obj-dd04c4999a9d75c2201aa1221a7496dd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/thinking-hand.obj-dd04c4999a9d75c2201aa1221a7496dd.mesh"]
+
+source_file="res://assets/thinking/thinking-hand.obj"
+dest_files=["res://.godot/imported/thinking-hand.obj-dd04c4999a9d75c2201aa1221a7496dd.mesh", "res://.godot/imported/thinking-hand.obj-dd04c4999a9d75c2201aa1221a7496dd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

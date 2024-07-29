@@ -4,8 +4,9 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var root = get_game_root()
-	root.toggle_touch_controls.connect(on_toggled)
-	on_toggled(root.touch_controls)
+	if root:
+		root.toggle_touch_controls.connect(on_toggled)
+		on_toggled(root.touch_controls)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

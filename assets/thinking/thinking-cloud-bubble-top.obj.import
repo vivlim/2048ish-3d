@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bf07md01lisi5"
+path="res://.godot/imported/thinking-cloud-bubble-top.obj-10b4bc4fb4bbee64e5355b0e210f8e5f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/thinking-cloud-bubble-top.obj-10b4bc4fb4bbee64e5355b0e210f8e5f.mesh"]
+
+source_file="res://assets/thinking/thinking-cloud-bubble-top.obj"
+dest_files=["res://.godot/imported/thinking-cloud-bubble-top.obj-10b4bc4fb4bbee64e5355b0e210f8e5f.mesh", "res://.godot/imported/thinking-cloud-bubble-top.obj-10b4bc4fb4bbee64e5355b0e210f8e5f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

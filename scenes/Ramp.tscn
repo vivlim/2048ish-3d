@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b84xg6yu65p5d"]
+[gd_scene load_steps=16 format=4 uid="uid://b5a36jir48wik"]
 
 [ext_resource type="Script" path="res://scripts/PlayerController.gd" id="1_ry57e"]
 [ext_resource type="PackedScene" uid="uid://c44kyuicrnvbt" path="res://scenes/NumberedCube3D.tscn" id="2_mml4k"]

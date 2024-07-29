@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxq15g5igu1gv"
+path="res://.godot/imported/thinking-head.obj-943e06441f1594e1a3d17a3fb6ef0a46.mesh"
+
+[deps]
+
+files=["res://.godot/imported/thinking-head.obj-943e06441f1594e1a3d17a3fb6ef0a46.mesh"]
+
+source_file="res://assets/thinking/thinking-head.obj"
+dest_files=["res://.godot/imported/thinking-head.obj-943e06441f1594e1a3d17a3fb6ef0a46.mesh", "res://.godot/imported/thinking-head.obj-943e06441f1594e1a3d17a3fb6ef0a46.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

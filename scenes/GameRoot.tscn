@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct2q6kcukwinf"]
+[gd_scene load_steps=9 format=3 uid="uid://ct2q6kcukwinf"]
 
 [ext_resource type="Script" path="res://scripts/game_root.gd" id="1_7b507"]
 [ext_resource type="PackedScene" uid="uid://cvyfx8rvlm222" path="res://scenes/Main.tscn" id="2_6chun"]
-[ext_resource type="PackedScene" uid="uid://b84xg6yu65p5d" path="res://scenes/Ramp.tscn" id="3_6oaeu"]
+[ext_resource type="PackedScene" uid="uid://b5a36jir48wik" path="res://scenes/Ramp.tscn" id="3_6oaeu"]
 [ext_resource type="Texture2D" uid="uid://bj70m804386qi" path="res://assets/external/kenney-game-icons/wrench.png" id="3_t74ga"]
 [ext_resource type="PackedScene" uid="uid://bmrk8eo5ndeih" path="res://scenes/Spheres.tscn" id="4_4iw87"]
 [ext_resource type="Script" path="res://scripts/modal_controller.gd" id="4_rojhd"]
 [ext_resource type="PackedScene" uid="uid://dd3v4157jt1lk" path="res://ui/MenuScene.tscn" id="5_5xxn2"]
+[ext_resource type="PackedScene" uid="uid://b84xg6yu65p5d" path="res://scenes/Thinking.tscn" id="5_j01g5"]
 
 [node name="GameRoot" type="Node3D" node_paths=PackedStringArray("stage_target", "modal_controller", "hud_grid")]
 script = ExtResource("1_7b507")
-stages = Array[PackedScene]([ExtResource("2_6chun"), ExtResource("3_6oaeu"), ExtResource("4_4iw87")])
+stages = Array[PackedScene]([ExtResource("2_6chun"), ExtResource("3_6oaeu"), ExtResource("4_4iw87"), ExtResource("5_j01g5")])
 stage_target = NodePath("CurrentStage")
 modal_controller = NodePath("GameUI/ModalController")
 hud_grid = NodePath("GameUI/GridContainer")
