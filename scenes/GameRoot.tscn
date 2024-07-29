@@ -1,13 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct2q6kcukwinf"]
+[gd_scene load_steps=6 format=3 uid="uid://ct2q6kcukwinf"]
 
 [ext_resource type="Script" path="res://scripts/game_root.gd" id="1_7b507"]
 [ext_resource type="PackedScene" uid="uid://cvyfx8rvlm222" path="res://scenes/Main.tscn" id="2_6chun"]
+[ext_resource type="Texture2D" uid="uid://bj70m804386qi" path="res://assets/external/kenney-game-icons/wrench.png" id="3_t74ga"]
+[ext_resource type="Script" path="res://scripts/modal_controller.gd" id="4_rojhd"]
+[ext_resource type="PackedScene" uid="uid://dd3v4157jt1lk" path="res://scenes/MenuScene.tscn" id="5_5xxn2"]
 
 [node name="GameRoot" type="Node3D" node_paths=PackedStringArray("stage_target")]
 script = ExtResource("1_7b507")
 stages = Array[PackedScene]([ExtResource("2_6chun")])
 stage_target = NodePath("CurrentStage")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="GameUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="SettingsButton" type="TextureButton" parent="GameUI/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_t74ga")
+
+[node name="CheckButton" type="CheckButton" parent="GameUI/GridContainer"]
+layout_mode = 2
+
+[node name="ModalController" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_rojhd")
+SettingsScene = ExtResource("5_5xxn2")
 
 [node name="CurrentStage" type="Node3D" parent="."]
+
+[connection signal="pressed" from="GameUI/GridContainer/SettingsButton" to="GameUI/ModalController" method="_on_settings_button_pressed"]

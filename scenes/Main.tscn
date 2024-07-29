@@ -54,6 +54,9 @@ mesh = SubResource("BoxMesh_f6u3m")
 skeleton = NodePath("")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+offset = Vector2(400, 0)
+transform = Transform2D(1, 0, 0, 1, 400, 0)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
@@ -117,6 +120,7 @@ mesh = SubResource("PlaneMesh_k0h8w")
 shape = SubResource("ConcavePolygonShape3D_50bjh")
 
 [node name="OnscreenDirectionalControls" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="ScreenUIGrid" type="GridContainer" parent="OnscreenDirectionalControls"]
 modulate = Color(1, 1, 1, 0.509804)
@@ -133,6 +137,7 @@ script = ExtResource("5_htj02")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Spacer2" type="Control" parent="OnscreenDirectionalControls/ScreenUIGrid"]
 layout_mode = 2

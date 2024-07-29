@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd3v4157jt1lk"]
+
+[ext_resource type="StyleBox" uid="uid://drsb7b4e33cyt" path="res://ui/styles/slide_in_panel_left.tres" id="1_0bm0j"]
+
+[node name="MenuScene" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_0bm0j")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "blah!"
